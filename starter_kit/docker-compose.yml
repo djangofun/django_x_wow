@@ -1,0 +1,22 @@
+services:
+  server:
+    build: ./app
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./app/:/usr/src/app/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.dev.env
+      - ./.dev.creds
+  db:
+      image: postgres:17
+      volumes:
+        - postgres_data:/var/lib/postgresql/data/
+      environment:
+        - POSTGRES_USER=django_fun
+        - POSTGRES_PASSWORD=django_fun
+        - POSTGRES_DB=djangofun
+
+volumes:
+  postgres_data:
