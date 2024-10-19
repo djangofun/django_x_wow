@@ -1,0 +1,5 @@
+.python-version
+.dev.creds
+.prod.env
+.prod.db.env
+staticfiles/
