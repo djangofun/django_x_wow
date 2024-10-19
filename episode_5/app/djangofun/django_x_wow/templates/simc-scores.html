@@ -2,4 +2,44 @@
     <script>
         const simcScores = {{ simc_scores|safe }};
     </script>
+
+    <body>
+        <div>
+            <canvas id="simcScoresChart"></canvas>
+        </div>
+    </body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-adapter-moment/1.0.1/chartjs-adapter-moment.min.js"></script>
+    <script>
+        const data = [];
+        for(let i=0; i<simcScores.length; i++) {
+            data.push({
+                x: new Date(simcScores[i].rating_time),
+                y: simcScores[i].dps_score}
+            );
+        }
+        new Chart(
+            document.getElementById("simcScoresChart"),
+            {
+                type: "line",
+                data: {
+                    datasets: [
+                        {
+                            label: "DPS Simc Scores",
+                            data: data,
+                        },
+                    ],
+                },
+                options: {
+                    scales: {
+                        x: {
+                            type: "timeseries",
+                        },
+                    },
+                },
+            }
+        )
+    </script>
 </html>
