@@ -19,4 +19,7 @@ COPY . .
 RUN apk add --update docker openrc
 RUN rc-update add docker boot
 
+# Setup cron
+RUN echo '*/30 * * * *    python /usr/src/app/manage.py refresh_characters' > /etc/crontabs/root
+
 ENTRYPOINT ["/usr/src/app/init.sh"]

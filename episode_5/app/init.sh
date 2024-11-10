@@ -12,4 +12,6 @@ echo "Database started"
 python manage.py migrate  --no-input
 python manage.py collectstatic --no-input --clear
 
+crond
+
 exec "$@"
